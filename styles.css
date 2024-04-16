@@ -1,0 +1,57 @@
+body {
+    font-family: 'Roboto', sans-serif; /* Cambiar la fuente a Roboto */
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    color: #fff;
+}
+
+.container {
+    max-width: 400px; /* Reducir el ancho del contenedor */
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #222;
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px; /* Reducir el tamaño de la fuente del título */
+    color: #4ca6a9; /* Celeste */
+}
+
+#question-container {
+    margin-bottom: 20px;
+    text-align: center; /* Centrar el texto de la pregunta */
+}
+
+#options {
+    list-style-type: none;
+    padding: 0;
+}
+
+#options button {
+    display: block;
+    width: 100%;
+    padding: 8px; /* Reducir el relleno del botón */
+    margin-bottom: 8px; /* Reducir el margen inferior del botón */
+    border: none;
+    border-radius: 5px;
+    background-color: #16697a; /* Azul */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px; /* Reducir el tamaño de la fuente del botón */
+}
+
+#options button:hover {
+    background-color: #468faf; /* Azul más claro */
+}
+
+#result {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #ccc; /* Gris */
+    font-size: 18px; /* Reducir el tamaño de la fuente del resultado */
+}
