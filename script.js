@@ -1,4 +1,4 @@
-const questions = [
+ const questions = [
     {
         question: "¿Quién descubrió la estructura del ADN?",
         options: ["Watson y Crick", "Einstein", "Fleming", "Mendel"],
@@ -135,15 +135,19 @@ function shuffleQuestions(array) {
     return array;
 }
 
-// Mezcla las preguntas aleatoriamente
+// Mezclar las preguntas aleatoriamente
 shuffleQuestions(questions);
 
 let currentQuestion = 0;
 let score = 0;
+let incorrectAnswers = 0; // Contador de respuestas incorrectas
 
 const questionElement = document.getElementById('question');
 const optionsElement = document.getElementById('options');
 const resultElement = document.getElementById('result');
+const timerElement = document.getElementById('timer');
+
+let timer; // Variable para almacenar el temporizador
 
 function displayQuestion() {
     const q = questions[currentQuestion];
@@ -155,17 +159,52 @@ function displayQuestion() {
         btn.addEventListener('click', () => checkAnswer(option, btn));
         optionsElement.appendChild(btn);
     });
+    // Iniciar temporizador
+    startTimer();
+}
+
+function startTimer() {
+    let timeLeft = 15; // 15 segundos por pregunta
+    updateTimer(timeLeft); // Mostrar el temporizador inicial
+    timer = setInterval(() => {
+        timeLeft--;
+        updateTimer(timeLeft); // Actualizar el temporizador en cada iteración
+
+        if (timeLeft === 0) {
+            clearInterval(timer);
+            checkAnswer(null, null); // Llamar a checkAnswer con null para pasar a la siguiente pregunta automáticamente
+        }
+    }, 1000);
+}
+
+function updateTimer(timeLeft) {
+    // Formatear el tiempo restante en formato mm:ss
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    timerElement.textContent = `Tiempo restante: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
 function checkAnswer(option, btn) {
+    clearInterval(timer); // Detener el temporizador al verificar la respuesta
+
     const q = questions[currentQuestion];
     if (option === q.answer) {
         score++;
         resultElement.textContent = '¡Respuesta Correcta!';
-        btn.style.backgroundColor = '#2ecc71'; // Color verde para respuesta correcta
+        if (btn) {
+            btn.style.backgroundColor = '#2ecc71'; // Color verde para respuesta correcta
+        }
     } else {
-        resultElement.textContent = 'Respuesta Incorrecta';
-        btn.style.backgroundColor = '#e74c3c'; // Color rojo para respuesta incorrecta
+        resultElement.textContent = `Respuesta Incorrecta. La respuesta correcta era: ${q.answer}`;
+        if (btn) {
+            btn.style.backgroundColor = '#e74c3c'; // Color rojo para respuesta incorrecta
+            // Encuentra el botón con la respuesta correcta y cámbiale el color a verde
+            const correctBtn = Array.from(optionsElement.children).find(child => child.textContent === q.answer);
+            if (correctBtn) {
+                correctBtn.style.backgroundColor = '#2ecc71'; // Cambia el color del botón con la respuesta correcta a verde
+            }
+        }
+        incorrectAnswers++; // Incrementar el contador de respuestas incorrectas
     }
     // Deshabilitar todos los botones después de la selección
     const buttons = optionsElement.querySelectorAll('button');
@@ -187,7 +226,7 @@ function checkAnswer(option, btn) {
 function showFinalResult() {
     questionElement.textContent = '';
     optionsElement.innerHTML = '';
-    resultElement.textContent = `Tu puntuación final es ${score} de ${questions.length}`;
+    resultElement.textContent = `Tu puntuación final es ${score} de ${questions.length}. Respuestas incorrectas: ${incorrectAnswers}`;
 }
 
 // Función para mostrar una pregunta y sus opciones de respuesta
@@ -202,6 +241,8 @@ function displayQuestion() {
         btn.addEventListener('click', () => checkAnswer(option, btn));
         optionsElement.appendChild(btn);
     });
+    // Reiniciar temporizador para la nueva pregunta
+    startTimer();
 }
 
 // Función para mezclar las opciones de respuesta de manera aleatoria
@@ -219,4 +260,24 @@ function shuffleOptions(options) {
     return options;
 }
 
-displayQuestion();
+// Obtener elementos relevantes del DOM
+const startQuizButton = document.getElementById('start-quiz');
+const welcomeScreen = document.getElementById('welcome-screen');
+const quizContainer = document.getElementById('question-container');
+const booksContainer = document.getElementById('books-container');
+
+// Agregar evento al botón de iniciar quizz
+startQuizButton.addEventListener('click', () => {
+    // Ocultar la pantalla de bienvenida y mostrar el contenedor de preguntas
+    welcomeScreen.style.display = 'none';
+    quizContainer.style.display = 'block';
+    // Mostrar la primera pregunta
+    displayQuestion();
+});
+
+// Agregar evento al botón de ver libros
+document.getElementById('view-books-btn').addEventListener('click', () => {
+    // Ocultar la pantalla de bienvenida y mostrar el contenedor de libros
+    welcomeScreen.style.display = 'none';
+    booksContainer.style.display = 'block';
+});

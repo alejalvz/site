@@ -1,28 +1,56 @@
+/* Estilos generales */
 body {
-    font-family: 'Roboto', sans-serif; /* Cambiar la fuente a Roboto */
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #333;
-    color: #fff;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
 .container {
-    max-width: 400px; /* Reducir el ancho del contenedor */
+    max-width: 500px;
     margin: 50px auto;
     padding: 20px;
     border-radius: 10px;
-    background-color: #222;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para el título */
 h1 {
     text-align: center;
-    font-size: 24px; /* Reducir el tamaño de la fuente del título */
-    color: #4ca6a9; /* Celeste */
+    font-size: 36px;
+    color: #4ca6a9;
+    margin-bottom: 30px;
 }
 
+/* Estilos para los botones */
+.buttons-container {
+    text-align: center;
+}
+
+.buttons-container button {
+    width: 80%;
+    padding: 15px 0;
+    margin: 10px auto;
+    border-radius: 20px;
+    background-color: #4ca6a9;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.buttons-container button:hover {
+    transform: translateY(-3px);
+    background-color: #16697a;
+}
+
+/* Estilos para las preguntas y opciones */
 #question-container {
-    margin-bottom: 20px;
-    text-align: center; /* Centrar el texto de la pregunta */
+    text-align: center;
+    margin-top: 50px;
 }
 
 #options {
@@ -33,25 +61,26 @@ h1 {
 #options button {
     display: block;
     width: 100%;
-    padding: 8px; /* Reducir el relleno del botón */
-    margin-bottom: 8px; /* Reducir el margen inferior del botón */
+    padding: 12px 20px;
+    margin-bottom: 8px;
     border: none;
     border-radius: 5px;
-    background-color: #16697a; /* Azul */
+    background-color: #4ca6a9;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: 16px; /* Reducir el tamaño de la fuente del botón */
+    font-size: 16px;
 }
 
 #options button:hover {
-    background-color: #468faf; /* Azul más claro */
+    background-color: #468faf;
 }
 
+/* Estilos para el resultado */
 #result {
     text-align: center;
     font-weight: bold;
     margin-top: 20px;
-    color: #ccc; /* Gris */
-    font-size: 18px; /* Reducir el tamaño de la fuente del resultado */
+    color: #ccc;
+    font-size: 18px;
 }

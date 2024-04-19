@@ -6,17 +6,145 @@
     <title>AcademixLink</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Cambiar la fuente a Roboto */
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 400px; /* Reducir el ancho del contenedor */
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #222;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px; /* Reducir el tamaño de la fuente del título */
+            color: #4ca6a9; /* Celeste */
+        }
+
+        #question-container {
+            margin-bottom: 20px;
+            text-align: center; /* Centrar el texto de la pregunta */
+        }
+
+        #options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #options button {
+            display: block;
+            width: 100%;
+            padding: 10px; /* Ajustar el relleno del botón */
+            margin-bottom: 8px; /* Reducir el margen inferior del botón */
+            border: none;
+            border-radius: 5px;
+            background-color: #16697a; /* Azul */
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px; /* Reducir el tamaño de la fuente del botón */
+        }
+
+        #options button:hover {
+            background-color: #468faf; /* Azul más claro */
+        }
+
+        #result {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #ccc; /* Gris */
+            font-size: 18px; /* Reducir el tamaño de la fuente del resultado */
+        }
+
+        /* Estilos adicionales para los botones de inicio y ver libros */
+        .welcome-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .welcome-buttons button {
+            width: 100%; /* Ajustar el ancho del botón */
+            padding: 10px; /* Ajustar el relleno del botón */
+            border: none;
+            border-radius: 5px;
+            background-color: #4ca6a9; /* Celeste */
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .welcome-buttons button:hover {
+            background-color: #16697a; /* Azul */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1 class="text-center my-5">AcademixLink</h1>
-        <div id="question-container">
-            <p id="question"></p>
-            <ul id="options" class="list-group"></ul>
+
+        <!-- Pantalla de bienvenida con botones de inicio, ver libros y redes del colegio -->
+        <div id="welcome-screen" class="text-center">
+            <div class="welcome-buttons">
+                <button id="start-quiz">Iniciar Quizz</button>
+                <button id="view-books">Ver Libros</button>
+                <button id="school-social">Redes del Colegio</button>
+            </div>
         </div>
-        <div id="result" class="text-center my-3"></div>
+
+        <!-- Contenedor de preguntas -->
+        <div id="question-container" style="display: none;">
+            <p id="question"></p>
+            <div id="timer" class="text-center mb-3"></div> <!-- Agregar el elemento del temporizador -->
+            <ul id="options" class="list-group"></ul>
+            <div id="result"></div>
+            <button id="restart-quiz">Reiniciar Quizz</button>
+        </div>
+
+        <!-- Contenedor de libros -->
+        <div id="books-container" style="display: none;">
+            <!-- Contenido del contenedor de libros -->
+        </div>
+
+        <!-- Interfaz de redes sociales del colegio -->
+        <div id="school-social-container" style="display: none;">
+            <div class="welcome-buttons">
+                <button onclick="window.location.href='https://www.facebook.com/inaspmadriz/?locale=es_LA'">Facebook del INASP</button>
+                <button onclick="window.location.href='https://www.instagram.com/explore/locations/710449989290900/instituto-nacional-augusto-salinas-pinell/'">Instagram del INASP</button>
+                <button onclick="window.location.href='https://www.facebook.com/minednicaragua/?locale=es_LA'">Facebook del MINED</button>
+                <button onclick="window.location.href='https://twitter.com/minednicaragua?lang=es'">Twitter del MINED</button>
+                <button onclick="window.location.href='https://www.youtube.com/channel/UCXPzUo5PFTrMTuqDic9bPKA'">YouTube del MINED</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        document.getElementById('view-books').addEventListener('click', function() {
+            window.location.href = 'https://nicaraguaeduca.mined.gob.ni/index.php/libros-de-texto-secundaria/';
+        });
+
+        document.getElementById('school-social').addEventListener('click', function() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('school-social-container').style.display = 'block';
+        });
+
+        document.getElementById('restart-quiz').addEventListener('click', function() {
+            document.getElementById('welcome-screen').style.display = 'block';
+            document.getElementById('question-container').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
